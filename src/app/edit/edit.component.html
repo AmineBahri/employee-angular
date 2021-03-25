@@ -1,0 +1,53 @@
+<div class="container">
+  <form (ngSubmit)="updateData()">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control" name="name" [(ngModel)]="employee.name">
+    </div>
+    <div class="form-group">
+      <label>Age</label>
+      <input type="text" class="form-control" name="age" [(ngModel)]="employee.age">
+    </div>
+    <div class="form-group">
+      <label>Salary</label>
+      <input type="text" class="form-control" name="salary" [(ngModel)]="employee.salary">
+    </div>
+    <div class="form-group">
+      <label>Hobby</label>
+      <div *ngFor="let obj of hobbyArr" >
+          <input type="checkbox" value="{{obj.value}}" name="hobby" (change)="hobbyChange($event)"
+          [checked]="this.selectedHobby.indexOf(obj.value) != -1">{{obj.key}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Country</label>
+      <select class="form-control" name="country" [(ngModel)]="employee.country" (change)="getState($event.target.value)">
+        <option value="">Select Country</option>
+        <option *ngFor="let obj of contryArr" value="{{obj.id}}">
+          {{obj.name}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>State</label>
+      <select class="form-control" name="state" [(ngModel)]="employee.state" (change)="getCity($event.target.value)">
+        <option value="">Select State</option>
+        <option *ngFor="let obj of stateArr" value="{{obj.id}}">
+          {{obj.name}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>City</label>
+      <select class="form-control" name="city" [(ngModel)]="employee.city">
+        <option value="">Select City</option>
+        <option *ngFor="let obj of cityArr" value="{{obj.id}}">
+          {{obj.name}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary">Update</button>
+    </div>
+  </form>
+</div>

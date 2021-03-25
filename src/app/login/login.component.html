@@ -1,0 +1,20 @@
+<form (ngSubmit)="submit()">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" name="email"
+      aria-describedby="emailHelp" placeholder="Enter email" [(ngModel)]="login.email">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+      name="password" [(ngModel)]="login.password">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <span class="text-danger" *ngIf="status==0" >{{message}}</span>
+  </div>
+  <div class="col-md-3"></div>
+  </div>
+</form>

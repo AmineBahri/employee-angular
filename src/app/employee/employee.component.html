@@ -1,0 +1,83 @@
+<div class="container">
+  <app-header></app-header>
+  <form (ngSubmit)="insertData()">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control" name="name" [(ngModel)]="employee.name">
+    </div>
+    <div class="form-group">
+      <label>Age</label>
+      <input type="text" class="form-control" name="age" [(ngModel)]="employee.age">
+    </div>
+    <div class="form-group">
+      <label>Salary</label>
+      <input type="text" class="form-control" name="salary" [(ngModel)]="employee.salary">
+    </div>
+    <div class="form-group">
+      <label>Hobby</label>
+      <div *ngFor="let obj of hobbyArr" >
+          <input type="checkbox" value="{{obj.value}}" name="hobby" (change)="hobbyChange($event)">{{obj.key}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Country</label>
+      <select class="form-control" name="country" [(ngModel)]="employee.country" (change)="getState($event)">
+        <option value="">Select Country</option>
+        <option *ngFor="let obj of contryArr" value="{{obj.id}}">
+          {{obj.name}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>State</label>
+      <select class="form-control" name="state" [(ngModel)]="employee.state" (change)="getCity($event)">
+        <option value="">Select State</option>
+        <option *ngFor="let obj of stateArr" value="{{obj.id}}">
+          {{obj.name}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>City</label>
+      <select class="form-control" name="city" [(ngModel)]="employee.city">
+        <option value="">Select City</option>
+        <option *ngFor="let obj of cityArr" value="{{obj.id}}">
+          {{obj.name}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Picture</label>
+      <input type="file" class="form-control" name="file" (change)="imageUpload($event)">
+    </div>
+    <!--<input type="submit" class="btn btn-primary">-->
+    <div class="form-group">
+      <button class="btn btn-primary">Insert</button>
+    </div>
+  </form>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Salary</th>
+        <th scope="col">Profile Picture</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let obj of dataArr" >
+        <th scope="row">{{obj.id}}</th>
+        <td>{{obj.name}}</td>
+        <td>{{obj.age}}</td>
+        <td>{{obj.salary}}</td>
+        <td><img [src]="obj.image ? imageDirectoryPath+obj.image : 'assets/image/no-image.png'" height="100px"></td>
+        <td><button class="btn btn-danger" (click)="deleteData(obj.id)">Delete</button>
+          <button class="btn btn-primary mx-2" routerLink="edit/{{obj.id}}">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+    <ngb-pagination [collectionSize]="total" [pageSize]="limit" [(page)]="page" aria-label="Default pagination" (pageChange)="getEmployeeData()"></ngb-pagination>
+  </table>
+</div>
